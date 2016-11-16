@@ -18,9 +18,13 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/semantic-ui/semantic.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "assets/semantic-ui/semantic.min.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
@@ -28,8 +32,10 @@
       }
     }
   ],
-  "addons": [],
-  "packages": [],
+  "addons": [
+  ],
+  "packages": [
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
@@ -41,7 +47,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "less",
     "prefixInterfaces": false,
     "inline": {
       "style": false,

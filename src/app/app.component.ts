@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddComplaintComponent } from './add-complaint/add-complaint.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+	// TODO: remove here and in tests
+	title = 'app works!';
 }

@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CountryService } from '../country.service/country.service';
 
 class Complaint {
 	company: Array<string> = [''];
@@ -17,8 +18,27 @@ class Complaint {
 	templateUrl: './add-complaint.component.html',
 	styleUrls: ['./add-complaint.component.less']
 })
-export class AddComplaintComponent {
+export class AddComplaintComponent implements OnInit {
 	complaint: Complaint = new Complaint();
+	countries: Array<Object>;
+	that = this;
+
+	constructor(private countryService: CountryService) { }
+
+	ngOnInit(): void {
+		this.getCountries();
+	}
+
+	getCountries() {
+		return this.countryService.getAll()
+			.then(this.extractData)
+			.then(data => this.countries = data);
+	}
+
+	extractData(res) { //: Response
+		let body = res.json();
+    	return body.data || {};
+	}
 
 	trackByIndex(index: number, obj: any): any {
 		return index;

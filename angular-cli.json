@@ -8,7 +8,7 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
+        "assets/semantic-ui/themes/basic",
         "favicon.ico"
       ],
       "index": "index.html",

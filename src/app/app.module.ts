@@ -4,10 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgSemanticModule } from "ng-semantic";
 
-import { AppComponent } from './app.component';
-import { AddComplaintComponent } from './add-complaint/add-complaint.component';
-import { AddRemoveFieldComponent } from './add-complaint/add-remove-field/add-remove-field.component';
-
 ///// DIRTY HACK //////
 // Since Angular2 RC6 ng-content component is not working if as selector used element
 // Issue: https://github.com/angular/angular/issues/11251
@@ -19,6 +15,11 @@ export class NgContentHack {
   // No behavior, the only purpose is to "declare" the tag in Angular2 
 }
 ////////////////////////////////////
+
+import { AppComponent } from './app.component';
+import { AddComplaintComponent } from './add-complaint/add-complaint.component';
+import { AddRemoveFieldComponent } from './add-complaint/add-remove-field/add-remove-field.component';
+import { CountryService } from './country.service/country.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ export class NgContentHack {
     HttpModule,
     NgSemanticModule
   ],
-  providers: [],
+  providers: [CountryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

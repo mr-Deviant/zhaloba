@@ -1,5 +1,5 @@
 {
-  "name": "zhaloba",
+  "name": "complaint",
   "version": "1.0.0",
   "license": "",
   "angular-cli": {},
@@ -20,11 +20,15 @@
     "@angular/platform-browser": "^2.1.0",
     "@angular/platform-browser-dynamic": "^2.1.0",
     "@angular/router": "^3.1.0",
+    "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "express": "^4.14.0",
     "geoip-lite": "^1.1.8",
+    "ip": "^1.1.4",
     "jquery": "^3.1.1",
+    "mongoose": "^4.7.0",
     "ng-semantic": "^1.1.11",
+    "ng2-restangular": "^0.1.21",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.6.23"

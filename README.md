@@ -1,4 +1,5 @@
-# Zhaloba
+# Complaint
+start: `forever start server.js`
 
 ## Competitors
 http://scamdb.info/

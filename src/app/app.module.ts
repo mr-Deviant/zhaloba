@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgSemanticModule } from "ng-semantic";
+import { RestangularModule } from 'ng2-restangular';
 
 ///// DIRTY HACK //////
 // Since Angular2 RC6 ng-content component is not working if as selector used element
@@ -32,7 +33,11 @@ import { CountryService } from './country.service/country.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgSemanticModule
+    NgSemanticModule,
+    RestangularModule.forRoot((RestangularProvider) => {
+        RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
+      }
+    )
   ],
   providers: [CountryService],
   bootstrap: [AppComponent]

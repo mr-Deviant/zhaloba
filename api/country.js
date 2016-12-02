@@ -266,7 +266,7 @@ module.exports = {
 	getByIp: function (req) {
 		let geoip = require('geoip-lite');
 
-		let ip = '93.126.83.249', // Only for testing, TODO: use req.ip instead
+		let ip = '94.76.102.4', // Only for testing, TODO: use req.ip instead
 			geo = geoip.lookup(ip),
 			result = {country: geo ? geo.country : ''};
 

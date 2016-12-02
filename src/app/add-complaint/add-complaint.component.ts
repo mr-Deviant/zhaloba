@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Complaint } from '../complaint';
 import { CountryService } from '../country.service/country.service';
-
-class Complaint {
-	company: Array<string> = [''];
-	name: Array<string> = [''];
-	surname: Array<string> = [''];
-	patronymic: Array<string> = [''];
-	country: Array<string> = [''];
-	city: Array<string> = [''];
-	address: Array<string> = [''];
-}
+import { Restangular } from 'ng2-restangular';
 
 // TODO: open with blurring is not working
 
@@ -21,9 +13,12 @@ class Complaint {
 export class AddComplaintComponent implements OnInit {
 	complaint: Complaint = new Complaint();
 	countries: Array<Object>;
-	that = this;
+	submitted: boolean = false;
 
-	constructor(private countryService: CountryService) { }
+	constructor(
+		private restangular: Restangular,
+		private countryService: CountryService,
+	) { }
 
 	ngOnInit(): void {
 		this.getCountries();
@@ -64,7 +59,11 @@ export class AddComplaintComponent implements OnInit {
 		}
 	}
 
-	addComplaint() {
+	addComplaint(form) {
+		this.submitted = true;
 		
+		if (form.valid) {
+			this.restangular.all('complaint').post(this.complaint);
+		}
 	}
 }

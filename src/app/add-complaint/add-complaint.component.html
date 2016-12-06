@@ -16,7 +16,7 @@
 
 					<div class="field">
 						<label>Сайт компании</label>
-						<input type="text" name="site" placeholder="http://site.com" [(ngModel)]="complaint.site[index]">
+						<input type="url" name="site" placeholder="http://site.com" [(ngModel)]="complaint.site[index]">
 					</div>
 				</div>
 				
@@ -47,11 +47,13 @@
 				<div class="three fields">
 					<div class="field">
 						<label>Страна</label>
+
+						<!-- Because of ngSemantic variables are not updated inside sm-select -->
 						<sm-select
 						[(model)]="complaint.country[index]"
 						placeholder="Страна"
 						class="fluid search">
-							<option *ngFor="let country of countries" value="{{country.code}}"><i class="{{country.code | lowercase}} flag"></i>{{country.name}}</option>
+							<option *ngFor="let country of countries;" [selected]="country.selected" value="{{country.code}}"><i class="{{country.code}} flag"></i>{{country.name}}</option>
 						</sm-select>
 					</div>
 
@@ -71,18 +73,18 @@
 			<div class="field-group" *ngFor="let something of complaint.phone ; trackBy: trackByIndex; let index = index">
 				<div class="three fields">
 					<div class="field">
-						<label>Телефон #1 (одно из важнейших полей) (паттерн https://github.com/RobinHerbots/Inputmask и код страны)</label>
-						<input type="text" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][0]">
+						<label>Телефон #1 (одно из важнейших полей)</label>
+						<input type="tel" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][0]" [appInputMask]="getPhoneMask()">
 					</div>
 
 					<div class="field">
 						<label>Телефон #2</label>
-						<input type="text" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][1]">
+						<input type="tel" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][1]" [appInputMask]="getPhoneMask()">
 					</div>
 
 					<div class="field">
 						<label>Телефон #3</label>
-						<input type="text" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][2]">
+						<input type="tel" name="phone" placeholder="Телефон" [(ngModel)]="complaint.phone[index][2]" [appInputMask]="getPhoneMask()">
 					</div>
 				</div>
 				
@@ -105,7 +107,7 @@
 				<!-- sm-checkbox is not working https://github.com/vladotesanovic/ngSemantic/issues/100 -->
 
 				<div class="ui checkbox">
-					<input type="checkbox" name="agree" id="agree" [(ngModel)]="complaint.agree" #agree="ngModel" required>
+					<input type="checkbox" name="agree" id="agree" [(ngModel)]="complaint.agree" #agree="ngModel" required pattern="true">
 					<label for="agree">Даю слово, что указанная мною информация правдива и объективна</label>
 				</div>
 			</div>

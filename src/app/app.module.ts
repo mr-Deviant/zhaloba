@@ -21,13 +21,15 @@ import { AppComponent } from './app.component';
 import { AddComplaintComponent } from './add-complaint/add-complaint.component';
 import { AddRemoveFieldComponent } from './add-complaint/add-remove-field/add-remove-field.component';
 import { CountryService } from './country.service/country.service';
+import { InputMaskDirective } from './input-mask.directive/input-mask.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddComplaintComponent,
     AddRemoveFieldComponent,
-    NgContentHack
+    NgContentHack,
+    InputMaskDirective
   ],
   imports: [
     BrowserModule,

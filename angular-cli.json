@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets/semantic-ui/themes/basic",
+        "assets/inputmask",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -23,7 +24,8 @@
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "assets/semantic-ui/semantic.min.js"
+        "assets/semantic-ui/semantic.min.js",
+        "assets/inputmask/inputmask.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

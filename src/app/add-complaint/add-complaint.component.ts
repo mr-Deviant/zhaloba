@@ -12,12 +12,13 @@ import { Restangular } from 'ng2-restangular';
 })
 export class AddComplaintComponent implements OnInit {
 	complaint: Complaint = new Complaint();
-	countries: Array<Object>;
+	countries: Array<any> = [];
+	userCountry: string;
 	submitted: boolean = false;
 
 	constructor(
 		private restangular: Restangular,
-		private countryService: CountryService,
+		private countryService: CountryService
 	) { }
 
 	ngOnInit(): void {
@@ -26,13 +27,33 @@ export class AddComplaintComponent implements OnInit {
 
 	getCountries() {
 		return this.countryService.getAll()
-			.then(this.extractData)
-			.then(data => this.countries = data);
+			.subscribe(result => {
+				this.countries = result.json().success ? result.json().data : '';
+				this.getUserCountry();
+			});
 	}
 
-	extractData(res) { //: Response
-		let body = res.json();
-    	return body.data || {};
+	getUserCountry() {
+		return this.countryService.getByIp()
+			.subscribe(result => {
+				// Save
+				this.userCountry = result.json().success ? result.json().data : '';
+				// Set
+				this.complaint.country[0] = this.userCountry;
+			});
+	}
+
+	getPhoneMask() {
+		let result = '';
+
+		for (var i = 0; i < this.countries.length; i++) {
+			if (this.countries[i].code.toLowerCase() === this.complaint.country[0].toLowerCase()) {
+				result = this.countries[i].phone;
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	trackByIndex(index: number, obj: any): any {

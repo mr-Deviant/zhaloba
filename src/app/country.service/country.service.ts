@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 
 interface countryInterface {
 	countryCode: string;
@@ -11,15 +10,13 @@ export class CountryService {
 	private countryUrl = 'http://localhost:3000/country'; // TODO: use constant
 	private countryByIpUrl = this.countryUrl + '/by-ip';
 
-	constructor(private http: Http) {
+	constructor(private http: Http) {}
 
-	}
-
-	getAll() {//: countryInterface
-		return this.http.get(this.countryUrl).toPromise();
+	getAll() {// TODO: check caching
+		return this.http.get(this.countryUrl);
 	}
 
 	getByIp() {
-		
+		return this.http.get(this.countryByIpUrl);
 	}
 }

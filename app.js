@@ -6,8 +6,8 @@ var express = require('express'),
 	// cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser');
 	cors = require('cors'),
-	complaint = require('./api/routes/complaint'),
-	country = require('./api/routes/country');
+	complaint = require('./routes/complaint'),
+	country = require('./routes/country');
 
 var app = express(),
 	db = mongoose.connection;
@@ -56,22 +56,4 @@ db.once('open', function() {
 	console.log('Connected to Mongoose');
 });
 
-// module.exports = app;
-
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = app;

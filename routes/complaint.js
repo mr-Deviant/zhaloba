@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express'),
+	complaint = require('../controllers/complaint');
+	
+let router = express.Router();
 
-router.post('/', function (req, res, next) {
-	var Complaint = require('../complaint');
-	Complaint.add(req, res);
-});
+router.post('/', complaint.create);
+
+router.get('/', complaint.list);
+
+// router.get('/:complaintId', serviceComplaint.complaintById);
+
+// router.put('/:complaintId', serviceComplaint.update);
+
+// router.delete('/:complaintId', serviceComplaint.delete);
 
 module.exports = router;

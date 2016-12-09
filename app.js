@@ -1,6 +1,9 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var express = require('express'),
-	mongoose = require('mongoose'),
-	// path = require('path'),
+	mongoose = require('./config/mongoose'),
+	db = mongoose(), // Should be defined before routes
+	path = require('path'),
 	// favicon = require('serve-favicon'),
 	// logger = require('morgan'),
 	// cookieParser = require('cookie-parser'),
@@ -9,8 +12,7 @@ var express = require('express'),
 	complaint = require('./routes/complaint'),
 	country = require('./routes/country');
 
-var app = express(),
-	db = mongoose.connection;
+var app = express();
 
 // View engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +25,7 @@ var app = express(),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public'))); // TODO: create such folder on production
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/complaint', complaint);
@@ -48,12 +50,6 @@ app.use('/country', country);
   res.render('error');
 });*/
 
-// Connect to DB (local connection)
-mongoose.connect('mongodb://localhost/ComplaintDB');
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log('Connected to Mongoose');
-});
-
 module.exports = app;
+
+// TODO: list here all express properties (for future)

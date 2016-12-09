@@ -3,8 +3,6 @@ import { Complaint } from '../complaint';
 import { CountryService } from '../country.service/country.service';
 import { Restangular } from 'ng2-restangular';
 
-// TODO: open with blurring is not working
-
 @Component({
 	selector: 'app-add-complaint',
 	templateUrl: './add-complaint.component.html',
@@ -14,7 +12,9 @@ export class AddComplaintComponent implements OnInit {
 	complaint: Complaint = new Complaint();
 	countries: Array<any> = [];
 	userCountry: string;
-	submitted: boolean = false;
+	submitted: boolean = false; // Submit button was pressed
+	loading: boolean = false; // Form is uploading in server
+	
 
 	constructor(
 		private restangular: Restangular,
@@ -84,7 +84,9 @@ export class AddComplaintComponent implements OnInit {
 		this.submitted = true;
 		
 		if (form.valid) {
-			this.restangular.all('complaint').post(this.complaint);
+			this.loading = true;
+			this.restangular.all('complaint').post(this.complaint)
+				.subscribe(res => this.loading = false);
 		}
 	}
 }

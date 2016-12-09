@@ -22,6 +22,7 @@ import { AddComplaintComponent } from './add-complaint/add-complaint.component';
 import { AddRemoveFieldComponent } from './add-complaint/add-remove-field/add-remove-field.component';
 import { CountryService } from './country.service/country.service';
 import { InputMaskDirective } from './input-mask.directive/input-mask.directive';
+import { LastAddedComplaintsComponent } from './last-added-complaints.component/last-added-complaints.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InputMaskDirective } from './input-mask.directive/input-mask.directive'
     AddComplaintComponent,
     AddRemoveFieldComponent,
     NgContentHack,
-    InputMaskDirective
+    InputMaskDirective,
+    LastAddedComplaintsComponent
   ],
   imports: [
     BrowserModule,

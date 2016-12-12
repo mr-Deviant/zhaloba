@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes }   from '@angular/router';
 import { NgSemanticModule } from "ng-semantic";
 import { RestangularModule } from 'ng2-restangular';
 
@@ -18,32 +19,69 @@ export class NgContentHack {
 ////////////////////////////////////
 
 import { AppComponent } from './app.component';
-import { AddComplaintComponent } from './add-complaint/add-complaint.component';
-import { AddRemoveFieldComponent } from './add-complaint/add-remove-field/add-remove-field.component';
+import { AddComplaintComponent } from './add-complaint.component/add-complaint.component';
+import { AddComplaintButtonComponent } from './add-complaint-button.component/add-complaint-button.component';
+import { AddComplaintServiceComponent } from './add-complaint-service.component/add-complaint-service.component';
+import { AddComplaintProductComponent } from './add-complaint-product.component/add-complaint-product.component';
+import { AddRemoveFieldComponent } from './add-complaint.component/add-remove-field.component/add-remove-field.component';
 import { CountryService } from './country.service/country.service';
-import { InputMaskDirective } from './input-mask.directive/input-mask.directive';
+import { AddComplaintService } from './add-complaint.service/add-complaint.service';
 import { LastAddedComplaintsComponent } from './last-added-complaints.component/last-added-complaints.component';
+import { HomeComponent } from './home.component/home.component';
+import { PageNotFoundComponent } from './page-not-found.component/page-not-found.component';
+
+
+// TODO: move in seperate file
+const appRoutes: Routes = [
+  
+  /*{ path: 'crisis-center', component: CrisisListComponent },
+  {
+    path: 'heroes',
+    component: HeroListComponent,
+    data: {
+      title: 'Heroes List'
+    }
+  },*/
+  {
+    path: 'add-complaint',
+    component: AddComplaintComponent,
+    children: [
+      {path: 'service', component: AddComplaintServiceComponent},
+      {path: 'product', component: AddComplaintProductComponent}
+    ]
+  },
+  {path: '', component: HomeComponent},
+  {path: '**', component: PageNotFoundComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     AddComplaintComponent,
+    AddComplaintButtonComponent,
+    AddComplaintServiceComponent,
+    AddComplaintProductComponent,
     AddRemoveFieldComponent,
     NgContentHack,
-    InputMaskDirective,
-    LastAddedComplaintsComponent
+    LastAddedComplaintsComponent,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgSemanticModule,
+    RouterModule.forRoot(appRoutes),
     RestangularModule.forRoot((RestangularProvider) => {
         RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
       }
     )
   ],
-  providers: [CountryService],
+  providers: [
+    AddComplaintService,
+    CountryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

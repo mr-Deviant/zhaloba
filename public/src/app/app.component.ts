@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AddComplaintComponent } from './add-complaint/add-complaint.component';
+import { AddComplaintComponent } from './add-complaint.component/add-complaint.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent {
 	// TODO: remove here and in tests

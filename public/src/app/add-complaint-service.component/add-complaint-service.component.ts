@@ -1,28 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Complaint } from '../complaint';
+import { AddComplaintService } from '../add-complaint.service/add-complaint.service';
 import { CountryService } from '../country.service/country.service';
-import { Restangular } from 'ng2-restangular';
 
 @Component({
-	selector: 'app-add-complaint',
-	templateUrl: './add-complaint.component.html',
-	styleUrls: ['./add-complaint.component.less']
+  //selector: 'app-add-complaint-service',
+  templateUrl: './add-complaint-service.component.html',
+  styleUrls: ['./add-complaint-service.component.less']
 })
-export class AddComplaintComponent implements OnInit {
+export class AddComplaintServiceComponent implements OnInit {
 	complaint: Complaint = new Complaint();
 	countries: Array<any> = [];
 	userCountry: string;
-	submitted: boolean = false; // Submit button was pressed
-	loading: boolean = false; // Form is uploading in server
-	
 
 	constructor(
-		private restangular: Restangular,
+		public addComplaintService: AddComplaintService,
 		private countryService: CountryService
-	) { }
+	) {
+		// Pass by reference
+		this.addComplaintService.complaint = this.complaint;
+		// Reset state
+		this.addComplaintService.submitted = false;
+		this.addComplaintService.loading = false;
+	}
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.getCountries();
+	}
+
+	trackByIndex(index: number, obj: any): any {
+		return index;
 	}
 
 	getCountries() {
@@ -56,11 +63,7 @@ export class AddComplaintComponent implements OnInit {
 		return result;
 	}
 
-	trackByIndex(index: number, obj: any): any {
-		return index;
-	}
-
-  	isAddAllowed(field) {
+	isAddAllowed(field) {
   		return this.complaint[field].length < 5;
   	}
 
@@ -77,16 +80,6 @@ export class AddComplaintComponent implements OnInit {
 	removeField(index, ...field) {
 		for (let i = 0; i < field.length; i++) {
 			this.complaint[field[i]].splice(index, 1);
-		}
-	}
-
-	addComplaint(form) {
-		this.submitted = true;
-		
-		if (form.valid) {
-			this.loading = true;
-			this.restangular.all('complaint').post(this.complaint)
-				.subscribe(res => this.loading = false);
 		}
 	}
 }

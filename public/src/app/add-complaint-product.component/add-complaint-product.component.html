@@ -1,0 +1,38 @@
+<form class="ui form" (ngSubmit)="addComplaintService.addComplaint(addProductComplaintForm)" #addProductComplaintForm="ngForm" novalidate>
+
+	<h4 class="ui dividing header">Информация о товаре</h4>
+
+	<div class="two fields">
+		<div class="field required" [ngClass]="{error: addComplaintService.submitted && productName.invalid}">
+			<label>Название товара</label>
+			<input type="text" name="product-name" placeholder="Название товара" [(ngModel)]="complaint.productName" #productName="ngModel" required>
+		</div>
+
+		<div class="field">
+			<label>Штрих код</label>
+			<input type="url" name="barcode" placeholder="Штрих код" [(ngModel)]="complaint.barcode">
+		</div>
+	</div>
+
+	<h4 class="ui dividing header">Описание проблемы</h4>
+
+	<div class="field required" [ngClass]="{error: addComplaintService.submitted && problemShort.invalid}">
+		<label>Суть проблемы кратко (заголовок)</label>
+		<input type="text" name="problem-short" placeholder="Суть проблемы кратко" [(ngModel)]="complaint.problemShort" #problemShort="ngModel" required>
+	</div>
+
+	<div class="field required" [ngClass]="{error: addComplaintService.submitted && problemFull.invalid}">
+		<label>Суть проблемы полностью и другие данные о товаре</label>
+		<textarea name="problem-full" rows="8" placeholder="Суть проблемы полностью и другие данные о товаре" [(ngModel)]="complaint.problemFull" #problemFull="ngModel" required></textarea>
+	</div>
+
+	<div class="field required" [ngClass]="{error: addComplaintService.submitted && agree.invalid}">
+		<div class="ui checkbox">
+			<input type="checkbox" name="agree" id="agree" [(ngModel)]="complaint.agree" #agree="ngModel" required pattern="true">
+			<label for="agree">Даю слово, что указанная мною информация правдива и объективна</label>
+		</div>
+	</div>
+
+	<button type="button" class="ui cancel button">Отмена</button>
+	<button type="submit" class="ui red button" [ngClass]="{loading: addComplaintService.loading}">Добавить</button>
+</form>

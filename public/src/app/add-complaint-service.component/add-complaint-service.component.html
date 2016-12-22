@@ -19,16 +19,16 @@
 		<div app-add-remove-field (onAddField)="addField(index, 'company')" (onRemoveField)="removeField(index, 'company')" [isAddAllowed]="isAddAllowed('company')" [isRemoveAllowed]="isRemoveAllowed('company')"></div>
 	</div>
 
-	<div class="field-group" *ngFor="let something of complaint.name; trackBy: trackByIndex; let index = index">
+	<div class="field-group" *ngFor="let something of complaint.surname; trackBy: trackByIndex; let index = index">
 		<div class="three fields">
-			<div class="field">
-				<label>Имя</label>
-				<input type="text" name="name-{{index}}" placeholder="Имя" [(ngModel)]="complaint.name[index]">
-			</div>
-
 			<div class="field">
 				<label>Фамилия</label>
 				<input type="text" name="surname-{{index}}" placeholder="Фамилия" [(ngModel)]="complaint.surname[index]">
+			</div>
+
+			<div class="field">
+				<label>Имя</label>
+				<input type="text" name="name-{{index}}" placeholder="Имя" [(ngModel)]="complaint.name[index]">
 			</div>
 
 			<div class="field">
@@ -49,6 +49,7 @@
 				[(model)]="complaint.country[index]"
 				placeholder="Страна"
 				class="fluid search">
+					<option value="">Не выбрано</option><!-- todo !!! -->
 					<option *ngFor="let country of countries;" [selected]="country.selected" value="{{country.code}}"><i class="{{country.code}} flag"></i>{{country.name}}</option>
 				</sm-select>
 			</div>
@@ -67,20 +68,15 @@
 	</div>
 	
 	<div class="field-group" *ngFor="let something of complaint.phone; trackBy: trackByIndex; let index = index">
-		<div class="three fields">
+		<div class="two fields">
 			<div class="field">
-				<label>Телефон #1 (одно из важнейших полей)</label>
-				<input type="tel" name="phone-1-{{index}}" [placeholder]="getPhoneMask()" [(ngModel)]="complaint.phone[index][0]">
+				<label>Телефон <span *ngIf="index === 0">(одно из важнейших полей)</span></label>
+				<input type="tel" name="phone-{{index}}" [placeholder]="getPhoneMask()" [(ngModel)]="complaint.phone[index]">
 			</div>
 
 			<div class="field">
-				<label>Телефон #2</label>
-				<input type="tel" name="phone-2-{{index}}" [placeholder]="getPhoneMask()" [(ngModel)]="complaint.phone[index][1]">
-			</div>
-
-			<div class="field">
-				<label>Телефон #3</label>
-				<input type="tel" name="phone-3-{{index}}" [placeholder]="getPhoneMask()" [(ngModel)]="complaint.phone[index][2]">
+				<label>Номер банковской карты</label>
+				<input type="text" name="bank-card-{{index}}" [(ngModel)]="complaint.bankCard[index]">
 			</div>
 		</div>
 		

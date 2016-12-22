@@ -24,8 +24,13 @@ export class AddComplaintService {
 		
 		if (form.valid) {
 			this.loading = true;
-			this.restangular.all('complaint').post(this.complaint)
-				.subscribe(res => this.loading = false);
+			this.restangular
+				.all('complaint')
+				.post(this.complaint)
+				.subscribe(res => {
+					this.loading = false;
+					console.log(res._id);
+				});
 		}
 	}
 }

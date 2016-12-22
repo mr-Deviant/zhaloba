@@ -19,8 +19,6 @@ export class LastAddedComplaintsComponent implements OnInit {
 	getLastAddedComplaints() {
 		this.restangular.all('complaint')
 			.customGET() // .getList() expect array
-			.subscribe(complaints => {
-      			this.complaints = complaints.success ? complaints.data : [];
-			});
+			.subscribe(complaints => this.complaints = complaints);
 	}
 }

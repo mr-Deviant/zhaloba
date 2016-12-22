@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Complaint } from '../complaint';
+import { Type, Complaint } from '../complaint';
 import { AddComplaintService } from '../add-complaint.service/add-complaint.service';
 import { CountryService } from '../country.service/country.service';
 
@@ -18,6 +18,7 @@ export class AddComplaintServiceComponent implements OnInit {
 		private countryService: CountryService
 	) {
 		// Pass by reference
+		this.complaint.type = Type.Service;
 		this.addComplaintService.complaint = this.complaint;
 		// Reset state
 		this.addComplaintService.submitted = false;
@@ -35,7 +36,7 @@ export class AddComplaintServiceComponent implements OnInit {
 	getCountries() {
 		return this.countryService.getAll()
 			.subscribe(result => {
-				this.countries = result.json().success ? result.json().data : '';
+				this.countries = result.json();
 				this.getUserCountry();
 			});
 	}
@@ -44,7 +45,7 @@ export class AddComplaintServiceComponent implements OnInit {
 		return this.countryService.getByIp()
 			.subscribe(result => {
 				// Save
-				this.userCountry = result.json().success ? result.json().data : '';
+				this.userCountry = result.json();
 				// Set
 				this.complaint.country[0] = this.userCountry;
 			});

@@ -6,6 +6,7 @@ router-outlet + * {
 }
 
 .section {
+	display: block;
 	margin-bottom: 40px;
 }
 .advanced-search {
@@ -13,4 +14,15 @@ router-outlet + * {
 }
 .heading-bottom {
 	padding-bottom: 1rem;
+}
+
+.header-navigation {
+	display: table;
+	width: 100%;
+}
+.header-navigation > * {
+	display: table-cell;
+}
+.breadcrumb > * {
+	margin-bottom: 40px;
 }

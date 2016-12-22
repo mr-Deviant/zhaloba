@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes }   from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { NgSemanticModule } from "ng-semantic";
 import { RestangularModule } from 'ng2-restangular';
 
@@ -29,6 +29,8 @@ import { AddComplaintService } from './add-complaint.service/add-complaint.servi
 import { LastAddedComplaintsComponent } from './last-added-complaints.component/last-added-complaints.component';
 import { HomeComponent } from './home.component/home.component';
 import { PageNotFoundComponent } from './page-not-found.component/page-not-found.component';
+import { ComplaintComponent } from './complaint.component/complaint.component';
+import { ArticleComponent } from './article.component/article.component';
 
 
 // TODO: move in seperate file
@@ -50,6 +52,8 @@ const appRoutes: Routes = [
       {path: 'product', component: AddComplaintProductComponent}
     ]
   },
+  {path: 'zhaloba/:id', component: ComplaintComponent},
+  {path: 'chto-delat-esli-vas-obmanuli-v-internete', component: ArticleComponent},
   {path: '', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -65,7 +69,9 @@ const appRoutes: Routes = [
     NgContentHack,
     LastAddedComplaintsComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ComplaintComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

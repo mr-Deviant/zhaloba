@@ -2,6 +2,7 @@ let config = require('./' + process.env.NODE_ENV + '.js'),
 	mongoose = require('mongoose');
 
 module.exports = function () {
+	mongoose.Promise = global.Promise; // Removes DeprecationWarning
 	let db = mongoose.connect(config.db),
 		conn = mongoose.connection;
 

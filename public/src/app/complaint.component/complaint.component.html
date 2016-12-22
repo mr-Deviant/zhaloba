@@ -1,0 +1,135 @@
+<style>
+.complaint-outer {
+	display: table;
+}
+.complaint-row-inline {
+	display: table-row;
+}
+.complaint-row-inline > div {
+	display: table-cell;
+}
+.complaint-row,
+.complaint-row-inline > div {
+	padding-bottom: 1rem;
+}
+.complaint-row-inline > div:last-child {
+	padding-left: 1rem;
+}
+.complaint-row-inline {
+	display: table-row;
+}
+</style>
+
+<div class="header-navigation">
+	<div class="ui breadcrumb">
+		<a class="section" routerLink="/">Главная</a>
+		<i class="right angle icon divider"></i>
+		<div class="active section">Просмотр жалобы</div>
+	</div>
+	<app-add-complaint-button></app-add-complaint-button>
+</div>
+
+<!-- Service -->
+<div *ngIf="complaint.type == 0">
+	<h4 class="ui dividing header">Информация о мошеннике</h4>
+
+	<div class="complaint-outer">
+		<div class="complaint-row-inline" *ngIf="complaint.company != ''">
+			<div>
+				<h4>Компания</h4>
+			</div>
+			<div>
+				<div *ngFor="let company of complaint.company">{{company}}</div>
+			</div>
+		</div>
+
+		<div class="complaint-row-inline" *ngIf="complaint.site != ''">
+			<div>
+				<h4>Сайт компании</h4>
+			</div>
+			<div>
+				<div *ngFor="let site of complaint.site"><a href="{{site}}">{{site}}</a></div>
+			</div>
+		</div>
+
+		<div class="complaint-row-inline" *ngIf="complaint.surname != '' && complaint.name != '' && complaint.patronymic != ''">
+			<div>
+				<h4>Фамилия, Имя, Отчество</h4>
+			</div>
+			<div>
+				<div *ngFor="let surname of complaint.surname; let index = index">
+					<span *ngIf="complaint.surname != ''">{{surname}} </span>
+					<span *ngIf="complaint.name != ''">{{complaint.name[index]}} </span>
+					<span *ngIf="complaint.patronymic != ''">{{complaint.patronymic[index]}}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="complaint-row-inline" *ngIf="complaint.country != '' && complaint.city != '' && complaint.address != ''">
+			<div>
+				<h4>Страна, город, адрес</h4>
+			</div>
+			<div>
+				<div *ngFor="let country of complaint.country; let index = index">
+					<span>{{complaint.countryName[index]}} </span>
+					<span>{{complaint.city[index]}} </span>
+					<span>{{complaint.address[index]}}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="complaint-row-inline" *ngIf="complaint.phone != ''">
+			<div>
+				<h4>Телефон:</h4>
+			</div>
+			<div>
+				<div *ngFor="let phone of complaint.phone">
+					{{phone}}
+				</div>
+			</div>
+		</div>
+
+		<div class="complaint-row-inline" *ngIf="complaint.bankCard != ''">
+			<div>
+				<h4>Номер банковской карты:</h4>
+			</div>
+			<div>
+				<div *ngFor="let bankCard of complaint.bankCard">
+					{{bankCard}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Product -->
+<div *ngIf="complaint.type == 1">
+	<h4 class="ui dividing header">Информация о товаре</h4>
+
+	<div class="complaint-row-inline">
+		<div>
+			<h4>Название товара:</h4>
+		</div>
+		<div>
+			{{complaint?.productName}}
+		</div>
+	</div>
+
+	<div class="complaint-row-inline" *ngIf="complaint.barcode != ''">
+		<div>
+			<h4>Штрих код:</h4>
+		</div>
+		<div>
+			{{complaint?.barcode}}
+		</div>
+	</div>
+</div>
+
+<h4 class="ui dividing header">Описание проблемы</h4>
+
+<div class="complaint-row">
+	<h3>{{complaint?.problemShort}}</h3>
+	<p style="white-space: pre;">{{complaint?.problemFull}}</p>
+</div>
+
+<a routerLink="/zhaloba/{{complaint.previous}}" *ngIf="complaint.previous">Предыдущая жалоба</a>
+<a routerLink="/zhaloba/{{complaint.next}}" *ngIf="complaint.next" style="float: right;">Последующая жалоба</a>

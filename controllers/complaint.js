@@ -1,6 +1,6 @@
 let Complaint = require('mongoose').model('Complaint');
 
-module.exports = {
+let obj = {
 	create: function (req, res, next) {
 		let complaint = new Complaint(req.body);
 
@@ -8,14 +8,11 @@ module.exports = {
 
 		complaint.save(function (err) {
 			if (err) {
-				res.json({
-					success: false,
-					error: 'Couldn\'t add complaint: ' + err
+				res.status(400).send({
+					message: 'Can\'t create complaint: ' + err
 				});
 			} else {
-				res.json({
-					success: true
-				});
+				res.json(complaint);
 			}
 		});
 	},
@@ -24,98 +21,121 @@ module.exports = {
 		Complaint
 			.find({})
 			.limit(3)
-			.sort({date: -1})
+			.sort({addedDate: 'desc'})
+			.select('type problemShort problemFull')
 			.exec(function (err, complaints) {
-				let result = {success: true};
-
 				if (err) {
-					result.success = false;
-					result.error = 'Couldn\'t get mixed complaints: ' + err;
+					res.status(400).send({
+						message: 'Can\'t list complaints: ' + err
+					});
 				} else {
-					result.data = complaints;
+					res.json(complaints);
 				}
-
-				res.json(result);
 			});
-	}/*,
-// TODO: make function useful for internal use, not only for api
-	list: function (req, res, next) {
-		ServiceComplaint.find(
-			{},
-			'-addedDate -ip',
-			{
-				limit: 3
-			},
-			function (err, complaints) {
-				let result = {success: true};
-
-				if (err) {
-					result.success = false;
-					result.error = 'Could\'nt get complaints: ' + err;
-				} else {
-					result.data = complaints;
-				}
-
-				res.json(result);
-			}
-		)
 	},
 
-	complaintById: function (req, res, next) {
+	read: function (req, res, next) {
 		let id = req.params.complaintId;
 
-		ServiceComplaint.findOne(
+		Complaint.findOne(
 			{_id: id},
-			'-addedDate -ip',
+			'-ip', // addedDate need for nested queries
 			{
 				limit: 3
 			},
 			function (err, complaint) {
-				let result = {success: true};
+				var country = require('../controllers/country');
+				var async = require('async');
 
 				if (err) {
-					result.success = false;
-					result.error = 'Could\'nt get complaint ' + id + ': ' + err;
+					res.status(400).send({
+						message: 'Can\'t get complaint ' + id + ': ' + err
+					});
 				} else {
-					result.data = complaint;
-				}
+					// We can't assign custom properties to Mongoose schema
+					// so we will copy it
+					var complaint = JSON.parse(JSON.stringify(complaint));
 
-				res.json(result);
+					// Find country name by country code
+					complaint.countryName = [];
+					for (var i = 0; i < complaint.country.length; i++) {
+						complaint.countryName.push(country.getCountryName(complaint.country[i]));
+					}
+
+					// Find previous and next complaints ids
+					async.parallel([
+							obj._previous.bind(null, complaint.addedDate),
+							obj._next.bind(null, complaint.addedDate)
+						], function(err, results) {
+						complaint.previous = results[0];
+						complaint.next = results[1];
+
+						res.json(complaint);
+					});
+				}
 			}
 		)
 	},
 
+	// TODO:
 	update: function (req, res, next) {
 		let id = req.params.complaintId;
 
 		ServiceComplaint.findByIdAndUpdate(id, req.body, function (err, complaint) {
-			let result = {success: true};
-
 			if (err) {
-				result.success = false;
-				result.error = 'Could\'nt update complaint ' + id + ': ' + err;
+				res.status(400).send({
+					message: 'Can\'t update complaint ' + id + ': ' + err
+				});
 			} else {
-				result.data = complaint;
+				res.json(complaint);
 			}
-
-			res.json(result);
 		});
 	},
 
+	// TODO:
 	delete: function (req, res, next) {
 		let id = req.params.complaintId;
 
 		ServiceComplaint.findByIdAndRemove(id, {}, function (err, complaint) {
-			let result = {success: true};
-
 			if (err) {
-				result.success = false;
-				result.error = 'Could\'nt delete complaint ' + id + ': ' + err;
+				res.status(400).send({
+					message: 'Can\'t delete complaint ' + id + ': ' + err
+				});
 			} else {
-				result.data = complaint;
+				res.json(complaint);
 			}
-
-			res.json(result);
 		});
-	}*/
-}
+	},
+
+	// Find previous post id
+	_previous: function (addedDate, callback) {
+		Complaint
+			.findOne({addedDate: {'$lt': addedDate}}) 
+			.limit(1)
+			.sort({addedDate: 'desc'})
+			.select('_id')
+			.exec(function (err, complaint) {
+				if (err) {
+					return callback(err);
+				}
+				callback(null, complaint ? complaint._id : '');
+			});
+	},
+
+	// Find next post id
+	_next: function (addedDate, callback) {
+		Complaint
+			.findOne({addedDate: {'$gt': addedDate}}) 
+			.limit(1)
+			.sort({addedDate: 'asc'})
+			.select('_id')
+			.exec(function (err, complaint) {
+				if (err) {
+					return callback(err);
+				}
+				callback(null, complaint ? complaint._id : '');
+			});
+	}
+};
+
+module.exports = obj;

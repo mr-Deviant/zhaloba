@@ -9,10 +9,9 @@ var express = require('express'),
 	// cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser');
 	cors = require('cors'),
+	app = express(),
 	complaint = require('./routes/complaint'),
 	country = require('./routes/country');
-
-var app = express();
 
 // View engine setup
 // app.set('views', path.join(__dirname, 'views'));

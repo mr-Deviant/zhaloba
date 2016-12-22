@@ -1,20 +1,21 @@
-enum Type {
+export enum Type {
 	Service,
 	Product
 };
 
 export class Complaint {
-	type: Type = 1;
+	type: Type;
 
 	company: Array<string> = [''];
 	site: Array<string> = [''];
-	name: Array<string> = [''];
 	surname: Array<string> = [''];
+	name: Array<string> = [''];
 	patronymic: Array<string> = [''];
 	country: Array<string> = [''];
 	city: Array<string> = [''];
 	address: Array<string> = [''];
-	phone: Array<Array<string>> = [['', '', '']];
+	phone: Array<string> = [''];
+	bankCard: Array<string> = [''];
 
 	productName: string = '';
 	barcode: string = ''; // TODO: maybe number

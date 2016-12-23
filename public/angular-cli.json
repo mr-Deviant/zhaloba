@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets/semantic-ui/themes/basic",
+        "images",
         "favicon.ico"
       ],
       "index": "index.html",

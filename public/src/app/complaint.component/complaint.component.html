@@ -128,8 +128,8 @@
 
 <div class="complaint-row">
 	<h3>{{complaint?.problemShort}}</h3>
-	<p style="white-space: pre;">{{complaint?.problemFull}}</p>
+	<p class="problem-full">{{complaint?.problemFull}}</p>
 </div>
 
 <a routerLink="/zhaloba/{{complaint.previous}}" *ngIf="complaint.previous">Предыдущая жалоба</a>
-<a routerLink="/zhaloba/{{complaint.next}}" *ngIf="complaint.next" style="float: right;">Последующая жалоба</a>
+<a routerLink="/zhaloba/{{complaint.next}}" *ngIf="complaint.next" class="next-complaint">Последующая жалоба</a>

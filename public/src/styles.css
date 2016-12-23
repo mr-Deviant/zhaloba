@@ -22,7 +22,11 @@ router-outlet + * {
 }
 .header-navigation > * {
 	display: table-cell;
+	vertical-align: top;
 }
-.breadcrumb > * {
-	margin-bottom: 40px;
+.breadcrumb {
+	/* Apply same styles as button has */
+	padding: 1rem 0;
+	line-height: 1.28571rem !important;
+	margin-bottom: 40px !important;
 }

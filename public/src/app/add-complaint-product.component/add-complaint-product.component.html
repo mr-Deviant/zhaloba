@@ -33,6 +33,8 @@
 		</div>
 	</div>
 
-	<button type="button" class="ui cancel button">Отмена</button>
-	<button type="submit" class="ui red button" [ngClass]="{loading: addComplaintService.loading}">Добавить</button>
+	<div class="buttons-outer">
+		<button type="button" class="ui cancel button">Отмена</button>
+		<button type="submit" class="ui red button" [ngClass]="{loading: addComplaintService.loading}">Добавить</button>
+	</div>
 </form>

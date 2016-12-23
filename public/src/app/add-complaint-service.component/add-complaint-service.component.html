@@ -103,7 +103,8 @@
 			<label for="agree">Даю слово, что указанная мною информация правдива и объективна</label>
 		</div>
 	</div>
-
-	<button type="button" class="ui cancel button" (click)="addComplaintService.back()">Отмена</button>
-	<button type="submit" class="ui red button" [ngClass]="{loading: addComplaintService.loading}">Добавить</button>
+	<div class="buttons-outer">
+		<button type="button" class="ui cancel button" (click)="addComplaintService.back()">Отмена</button>
+		<button type="submit" class="ui red button" [ngClass]="{loading: addComplaintService.loading}">Добавить</button>
+	</div>
 </form>

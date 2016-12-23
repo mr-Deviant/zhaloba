@@ -1,0 +1,13 @@
+@line-height: 1.5rem;
+@lines-num: 7;
+
+.last-added-problem-full {
+	display: -webkit-box;
+	-webkit-line-clamp: @lines-num; /* Not working in FF and IE */
+	-webkit-box-orient: vertical;
+
+	line-height: @line-height;
+	overflow: hidden;
+	max-height: @line-height * @lines-num; /* For other browsers */
+	white-space: pre-wrap;
+}

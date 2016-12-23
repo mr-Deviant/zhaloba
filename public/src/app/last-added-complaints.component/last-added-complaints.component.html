@@ -2,8 +2,8 @@
 	<h2 class="heading-bottom">Последние добавленные жалобы</h2>
 	<div class="ui stackable three column divided grid">
 		<div *ngFor="let complaint of complaints" class="column">
-			<a href="/zhaloba/{{complaint._id}}">{{complaint.problemShort}}</a>
-			<p style="white-space: pre;">{{complaint.problemFull}}</p>
+			<p><a href="/zhaloba/{{complaint._id}}">{{complaint.problemShort}}</a></p>
+			<p class="last-added-problem-full">{{complaint.problemFull}}</p>
 		</div>
 	</div>
 </div>

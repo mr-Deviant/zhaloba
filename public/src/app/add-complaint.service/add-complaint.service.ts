@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { Restangular } from 'ng2-restangular';
 import { Complaint } from '../complaint';
 
@@ -12,6 +13,7 @@ export class AddComplaintService {
 
 	constructor(
 		private location: Location,
+		private router: Router,
 		private restangular: Restangular
 	) { }
 
@@ -29,7 +31,8 @@ export class AddComplaintService {
 				.post(this.complaint)
 				.subscribe(res => {
 					this.loading = false;
-					console.log(res._id);
+
+					this.router.navigate(['/zhaloba', res._id]);
 				});
 		}
 	}

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "forever ./bin/www",
-    "postinstall": "cd public && npm install && ng build"
+    "postinstall": "cd public && npm install && npm install -g angular-cli && ng build"
   },
   "dependencies": {
     "async": "^2.1.4",

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "forever ./bin/www",
-    "postinstall": "npm install angular-cli@1.0.0-beta.20-4 forever -g && cd public && npm install && npm install --dev && ng build"
+    "postinstall": "npm install angular-cli@1.0.0-beta.20-4 forever -g && cd public && npm install && npm install --dev && ng build --prod"
   },
   "dependencies": {
     "async": "^2.1.4",

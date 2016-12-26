@@ -81,6 +81,7 @@ const appRoutes: Routes = [
     NgSemanticModule,
     RouterModule.forRoot(appRoutes),
     RestangularModule.forRoot((RestangularProvider) => {
+      console.log('env', environment.production);
         if (!environment.production) {
           RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
         }

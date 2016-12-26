@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "forever ./bin/www",
-    "postinstall": "cd public && npm install && npm install -g angular-cli && ng build"
+    "postinstall": "cd public && npm install && npm install -g angular-cli @angular/compiler-cli ts-node typescript && ng build"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -19,8 +19,5 @@
     "mongoose": "~4.7.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-  },
-  "engines": {
-    "node": "^7.0.0"
   }
 }

@@ -1,3 +1,3 @@
 module.exports = {
-	db: 'mongodb://username:password@hostname:port/complaint'
+	db: 'mongodb://Deviant:Zhaloba1985@ds145188.mlab.com:45188/zhaloba'
 };

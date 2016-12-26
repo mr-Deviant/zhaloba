@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { NgSemanticModule } from "ng-semantic";
 import { RestangularModule } from 'ng2-restangular';
+import { environment } from '../environments/environment';
 
 ///// DIRTY HACK //////
 // Since Angular2 RC6 ng-content component is not working if as selector used element
@@ -80,7 +81,9 @@ const appRoutes: Routes = [
     NgSemanticModule,
     RouterModule.forRoot(appRoutes),
     RestangularModule.forRoot((RestangularProvider) => {
-        RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
+        if (!environment.production) {
+          RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
+        }
       }
     )
   ],

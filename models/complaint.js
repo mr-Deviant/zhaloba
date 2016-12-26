@@ -1,11 +1,3 @@
-// Installing MongoDB http://www.pronique.com/blog/installing-mongodb-on-windows-the-wamp-way
-// Start MongoDB `mongod --dbpath=C:/Program Files/MongoDB/bin/mongod.exe`
-//show dbs // show all tables
-//use complaint // switch to table
-//show collections // show schemas
-//var schematodo = db.tasks.findOne();
-// for (var key in schematodo) { print (key) ;
-
 let mongoose = require('mongoose'),
 	ip = require('ip');
 

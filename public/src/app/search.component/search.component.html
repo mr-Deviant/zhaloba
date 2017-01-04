@@ -1,0 +1,107 @@
+<section class="row section">
+	<form class="column" (ngSubmit)="simpleSearch(simpleSearchForm)" #simpleSearchForm="ngForm" novalidate>
+		<h2>Быстрый поиск по базе мошенников</h2>
+		<div class="ui action left icon big fluid input">
+			<i class="search icon"></i>
+			<input type="text" name="simple-search" placeholder="Данные мошенника: Компания, фамилия, телефон, ..." [(ngModel)]="search.query" required>
+			<button type="submit" class="ui big teal button" [ngClass]="{loading: loading}">Поиск</button>
+		</div>
+		<!--p class="advanced-search"><a href="#">Расширенный поиск</a></p--><!-- TODO -->
+	</form>
+	<div class="search-results" *ngIf="submitted">
+		<h3 class="row" style="margin-top: 1rem;">Результаты поиска</h3>
+		<div *ngFor="let complaint of search.results" class="ui vertical segment">
+
+			<!-- Service -->
+			<div *ngIf="complaint.type == 0">
+				<div class="complaint-outer">
+					<div class="complaint-row-inline" *ngIf="complaint.company != ''">
+						<div>
+							<h4>Компания</h4>
+						</div>
+						<div>
+							<div *ngFor="let company of complaint.company" [innerHTML]="company">{{company}}</div>
+						</div>
+					</div>
+
+					<div class="complaint-row-inline" *ngIf="complaint.site != ''">
+						<div>
+							<h4>Сайт компании</h4>
+						</div>
+						<div>
+							<div *ngFor="let site of complaint.site"><a href="{{site}}" [innerHTML]="site"></a></div>
+						</div>
+					</div>
+
+					<div class="complaint-row-inline" *ngIf="complaint.surname != '' && complaint.name != '' && complaint.patronymic != ''">
+						<div>
+							<h4>Фамилия, Имя, Отчество</h4>
+						</div>
+						<div>
+							<div *ngFor="let surname of complaint.surname; let index = index">
+								<span *ngIf="complaint.surname != ''" [innerHTML]="surname"></span>
+								<span *ngIf="complaint.name != ''" [innerHTML]="complaint.name[index]"></span>
+								<span *ngIf="complaint.patronymic != ''" [innerHTML]="complaint.patronymic[index]"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="complaint-row-inline" *ngIf="complaint.country != '' && complaint.city != '' && complaint.address != ''">
+						<div>
+							<h4>Страна, город, адрес</h4>
+						</div>
+						<div>
+							<div *ngFor="let country of complaint.country; let index = index">
+								<span>{{complaint.countryName[index]}} </span>
+								<span>{{complaint.city[index]}} </span>
+								<span [innerHTML]="complaint.address[index]"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="complaint-row-inline" *ngIf="complaint.phone != ''">
+						<div>
+							<h4>Телефон:</h4>
+						</div>
+						<div>
+							<div *ngFor="let phone of complaint.phone" [innerHTML]="phone"></div>
+						</div>
+					</div>
+
+					<div class="complaint-row-inline" *ngIf="complaint.bankCard != ''">
+						<div>
+							<h4>Номер банковской карты:</h4>
+						</div>
+						<div>
+							<div *ngFor="let bankCard of complaint.bankCard" [innerHTML]="bankCard"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Product -->
+			<div *ngIf="complaint.type == 1">
+				<div class="complaint-row-inline">
+					<div>
+						<h4>Название товара:</h4>
+					</div>
+					<div [innerHTML]="complaint?.productName"></div>
+				</div>
+
+				<div class="complaint-row-inline" *ngIf="complaint.barcode != ''">
+					<div>
+						<h4>Штрих код:</h4>
+					</div>
+					<div [innerHTML]="complaint?.barcode"></div>
+				</div>
+			</div>
+
+			<div class="complaint-row">
+				<h4 [innerHTML]="complaint?.problemShort"></h4>
+				<p class="problem-full" [innerHTML]="complaint?.problemFull"></p>
+			</div>
+		</div>
+		<div *ngIf="search.results.length === 0" class="ui message">
+			<p>Ничего не найдено</p>
+		</div>
+	</div>
+</section>

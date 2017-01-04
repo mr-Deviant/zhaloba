@@ -44,8 +44,8 @@ let obj = {
 				limit: 3
 			},
 			function (err, complaint) {
-				var country = require('../controllers/country');
-				var async = require('async');
+				let country = require('../controllers/country');
+				let async = require('async');
 
 				if (err) {
 					res.status(400).send({

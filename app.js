@@ -7,11 +7,12 @@ var express = require('express'),
 	// favicon = require('serve-favicon'),
 	// logger = require('morgan'),
 	// cookieParser = require('cookie-parser'),
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'); // Parse request bodies
 	cors = require('cors'),
 	app = express(),
 	complaint = require('./routes/complaint'),
-	country = require('./routes/country');
+	country = require('./routes/country'),
+	search = require('./routes/search');
 
 // View engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -20,15 +21,17 @@ var express = require('express'),
 // Uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-//app.use(logger('dev'));
+//app.use(logger('dev')); // Output development-friendly colored logs
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public/dist')));
 app.use(cors());
 
 app.use('/complaint', complaint);
 app.use('/country', country);
+app.use('/search', search);
+
+app.use(express.static(path.join(__dirname, 'public/dist'))); // Should be placed after routes
 
 
 // Catch 404 and forward to error handler

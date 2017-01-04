@@ -32,19 +32,11 @@ import { HomeComponent } from './home.component/home.component';
 import { PageNotFoundComponent } from './page-not-found.component/page-not-found.component';
 import { ComplaintComponent } from './complaint.component/complaint.component';
 import { ArticleComponent } from './article.component/article.component';
+import { SearchComponent } from './search.component/search.component';
 
 
 // TODO: move in seperate file
 const appRoutes: Routes = [
-  
-  /*{ path: 'crisis-center', component: CrisisListComponent },
-  {
-    path: 'heroes',
-    component: HeroListComponent,
-    data: {
-      title: 'Heroes List'
-    }
-  },*/
   {
     path: 'add-complaint',
     component: AddComplaintComponent,
@@ -72,7 +64,8 @@ const appRoutes: Routes = [
     HomeComponent,
     PageNotFoundComponent,
     ComplaintComponent,
-    ArticleComponent
+    ArticleComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +74,6 @@ const appRoutes: Routes = [
     NgSemanticModule,
     RouterModule.forRoot(appRoutes),
     RestangularModule.forRoot((RestangularProvider) => {
-      console.log('env', environment.production);
         if (!environment.production) {
           RestangularProvider.setBaseUrl('http://localhost:3000'); // TODO: use constant
         }

@@ -29,7 +29,7 @@ module.exports = {
 				{'problemFull': search}
 			]})
 			//.limit(10)
-			//.sort({addedDate: 'desc'})
+			.sort({addedDate: 'desc'})
 			.select('-ip')
 			.exec(function (err, complaints) {
 				if (err) {

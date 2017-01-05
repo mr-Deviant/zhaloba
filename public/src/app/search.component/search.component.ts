@@ -18,11 +18,13 @@ export class SearchComponent implements OnInit {
 	};
 
 	submitted = false;
+	sended = false;
 	loading = false;
 
 	simpleSearch(form) {
+		this.submitted = true;
 		if (form.valid) {
-			this.submitted = true;
+			this.sended = true;
 			this.loading = true;
 
 			this.restangular
@@ -33,7 +35,6 @@ export class SearchComponent implements OnInit {
 					this.search.results = this.highlightText(results);
 				});
 		}
-
 	}
 
 	highlightText(results) {

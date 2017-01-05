@@ -1,6 +1,37 @@
+.complaint-outer {
+	display: table;
+}
+.complaint-row-inline {
+	display: table-row;
+}
+.complaint-row-inline > div {
+	display: table-cell;
+}
+.complaint-row,
+.complaint-row-inline > div {
+	padding-bottom: 1rem;
+}
+.complaint-row-inline > div:last-child {
+	padding-left: 1rem;
+}
+.complaint-row-inline {
+	display: table-row;
+}
 .problem-full {
 	white-space: pre-wrap;
 }
-.next-complaint {
-	float: right;
+.prev-next {
+	display: flex;
+	width: 100%;
+}
+.prev-next > div {
+	padding: 0 0.5rem;
+}
+.prev-next > div:first-child {
+	flex: 1 1 auto;
+	padding-left: 0;
+}
+.prev-next > div:last-child {
+	flex: 0 1 auto;
+	padding-right: 0;
 }

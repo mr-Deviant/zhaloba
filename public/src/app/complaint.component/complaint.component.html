@@ -1,25 +1,3 @@
-<style>
-.complaint-outer {
-	display: table;
-}
-.complaint-row-inline {
-	display: table-row;
-}
-.complaint-row-inline > div {
-	display: table-cell;
-}
-.complaint-row,
-.complaint-row-inline > div {
-	padding-bottom: 1rem;
-}
-.complaint-row-inline > div:last-child {
-	padding-left: 1rem;
-}
-.complaint-row-inline {
-	display: table-row;
-}
-</style>
-
 <div class="header-navigation">
 	<div class="ui breadcrumb">
 		<a class="section" routerLink="/">Главная</a>
@@ -131,5 +109,11 @@
 	<p class="problem-full">{{complaint?.problemFull}}</p>
 </div>
 
-<a routerLink="/zhaloba/{{complaint.previous}}" *ngIf="complaint.previous">Предыдущая жалоба</a>
-<a routerLink="/zhaloba/{{complaint.next}}" *ngIf="complaint.next" class="next-complaint">Последующая жалоба</a>
+<div class="prev-next">
+	<div>
+		<a routerLink="/zhaloba/{{complaint.previousLink}}" *ngIf="complaint.previousLink"><i class="angle left icon"></i>{{complaint.previousName}}</a>
+	</div>
+	<div>
+		<a routerLink="/zhaloba/{{complaint.nextLink}}" *ngIf="complaint.nextLink" class="next-complaint">{{complaint.nextName}}<i class="angle right icon"></i></a>
+	</div>
+</div>

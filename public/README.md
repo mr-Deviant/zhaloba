@@ -5,6 +5,5 @@ https://zhaloba.herokuapp.com/
 http://scamdb.info/
 http://kidala.com/
 http://moshennikov.net/
-http://vsemkidalam.net/index.php
 http://svolota.org.ua/
 http://jaloba.com.ua

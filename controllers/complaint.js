@@ -67,8 +67,10 @@ let obj = {
 							obj._previous.bind(null, complaint.addedDate),
 							obj._next.bind(null, complaint.addedDate)
 						], function(err, results) {
-						complaint.previous = results[0];
-						complaint.next = results[1];
+						complaint.previousLink = results[0][0];
+						complaint.previousName = results[0][1];
+						complaint.nextLink = results[1][0];
+						complaint.nextName = results[1][1];
 
 						res.json(complaint);
 					});
@@ -113,12 +115,16 @@ let obj = {
 			.findOne({addedDate: {'$lt': addedDate}}) 
 			.limit(1)
 			.sort({addedDate: 'desc'})
-			.select('_id')
+			.select('_id problemShort')
 			.exec(function (err, complaint) {
 				if (err) {
 					return callback(err);
 				}
-				callback(null, complaint ? complaint._id : '');
+				callback(
+					null,
+					complaint ? complaint._id : '',
+					complaint ? complaint.problemShort : ''
+				);
 			});
 	},
 
@@ -128,12 +134,16 @@ let obj = {
 			.findOne({addedDate: {'$gt': addedDate}}) 
 			.limit(1)
 			.sort({addedDate: 'asc'})
-			.select('_id')
+			.select('_id problemShort')
 			.exec(function (err, complaint) {
 				if (err) {
 					return callback(err);
 				}
-				callback(null, complaint ? complaint._id : '');
+				callback(
+					null,
+					complaint ? complaint._id : '',
+					complaint ? complaint.problemShort : ''
+				);
 			});
 	}
 };

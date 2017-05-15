@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-interface countryInterface {
+interface countryInterface { // TODO: what for?
 	countryCode: string;
 }
 

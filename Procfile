@@ -1,1 +1,1 @@
-web: forever ./bin/www
+web: forever -e logs/error.log ./bin/www

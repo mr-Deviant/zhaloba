@@ -10,5 +10,3 @@ export class AppComponent {
 	// TODO: remove here and in tests
 	title = 'app works!';
 }
-
-// TODO: Make nice preloader image

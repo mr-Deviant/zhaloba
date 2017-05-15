@@ -1,0 +1,23 @@
+{
+  "ignore": [
+    ".git/",
+    "_info/",
+    "_seo/",
+    "logs/",
+    "node_modules/",
+    "public/",
+    ".gitignore",
+    "Procfile"
+  ],
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "watch": [
+    "./",
+    "bin/www"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js"
+}
